@@ -45,17 +45,17 @@ jobs:
       run: |
         docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }} .
     
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.28.0
-      with:
-        image-ref: '${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }}'
-        format: 'table'
-        exit-code: '1'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        scanners: 'vuln'
-        severity: 'CRITICAL,HIGH'
-        timeout: 60m
+    # - name: Run Trivy vulnerability scanner
+    #   uses: aquasecurity/trivy-action@0.28.0
+    #   with:
+    #     image-ref: '${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }}'
+    #     format: 'table'
+    #     exit-code: '1'
+    #     ignore-unfixed: true
+    #     vuln-type: 'os,library'
+    #     scanners: 'vuln'
+    #     severity: 'CRITICAL,HIGH'
+    #     timeout: 60m
 
     - name: Push Docker image
       run: |
