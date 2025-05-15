@@ -41,7 +41,20 @@ jobs:
         username: ${{ secrets.AZURE_CLIENT_ID }}
         password: ${{ secrets.AZURE_CLIENT_SECRET }}
 
-    - name: Build and Push Docker image
+    - name: Build Docker image
       run: |
         docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }} .
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        image-ref: '${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }}'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+
+    - name: Push Docker image
+      run: |
         docker push ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }}
