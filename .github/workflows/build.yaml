@@ -55,6 +55,7 @@ jobs:
         vuln-type: 'os,library'
         scanners: 'vuln'
         severity: 'CRITICAL,HIGH'
+        timeout: 60m
 
     - name: Push Docker image
       run: |
