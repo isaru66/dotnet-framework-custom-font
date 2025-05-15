@@ -43,7 +43,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }} .
+        docker build -t ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:latest .
     
     # - name: Run Trivy vulnerability scanner
     #   uses: aquasecurity/trivy-action@0.28.0
@@ -59,4 +59,4 @@ jobs:
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:${{ github.sha }}
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/aspnet-custom-font:latest
