@@ -24,3 +24,6 @@ jobs:
 
     - name: Build
       run: msbuild /p:Configuration=Release
+
+    - name: Build Docker image
+      run: docker build -t acrisaru66test/aspnet-custom-font:${{ github.sha }} .
